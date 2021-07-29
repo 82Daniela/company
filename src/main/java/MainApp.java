@@ -19,7 +19,7 @@ public class MainApp {
         employee.setSalary(new BigDecimal(10000));
         employee.setSex('M');
 
-       EmployeeRepository.saveEmployee(manager, employee);
+        EmployeeRepository.saveEmployee(manager, employee);
 
 
     }
