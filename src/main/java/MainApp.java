@@ -8,15 +8,15 @@ public class MainApp {
 
     public static void main(String[] args) {
 
-        EntityManager em = JpaUtil.getEntityManager();
+        EntityManager manager = JpaUtil.getEntityManager();
 
         Employee employee = new Employee();
 
-        employee.setName("Joao");
-        employee.setLastName("Silva Rocha Dourado");
+        employee.setName("Joshua");
+        employee.setLastName("Blue");
         employee.setSex('M');
 
-       EmployeeRepository.updateEmployee(em,1L,employee);
+       EmployeeRepository.saveEmployee(manager, employee);
 
 
     }
