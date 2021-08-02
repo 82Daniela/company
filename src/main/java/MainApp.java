@@ -1,5 +1,8 @@
+import model.Departament;
 import model.Employee;
-import repository.EmployeeRepository;
+import repository.DepartamentRepository;
+import repository.DepartamentRepositoryImpl;
+import repository.EmployeeRepositoryImpl;
 import util.JpaUtil;
 
 import javax.persistence.EntityManager;
@@ -11,16 +14,35 @@ public class MainApp {
 
         EntityManager manager = JpaUtil.getEntityManager();
 
-        Employee employee = new Employee();
+        try {
 
-        employee.setName("Joshua");
-        employee.setLastName("Blue");
-        employee.setAddress("USA");
-        employee.setSalary(new BigDecimal(10000));
-        employee.setSex('M');
+            manager.getTransaction().begin();
 
-        EmployeeRepository.saveEmployee(manager, employee);
+            EmployeeRepositoryImpl employeeRepository = new EmployeeRepositoryImpl(manager);
 
+            Employee employee = new Employee();
+            employee.setName("Josh");
+            employee.setLastName("Red");
+            employee.setSalary(new BigDecimal(10000));
+
+
+            Departament departament = new Departament();
+            DepartamentRepositoryImpl departamentRepository = new DepartamentRepositoryImpl(manager);
+            departament.setName("Marketing");
+            departament.setEmployee(employeeRepository.getEmployeeById(1l));
+            manager.persist(departament);
+
+
+            manager.getTransaction().commit();
+
+
+        } catch (Exception e) {
+            manager.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            manager.close();
+            JpaUtil.close();
+        }
 
     }
 

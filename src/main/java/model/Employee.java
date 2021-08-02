@@ -19,9 +19,28 @@ public class Employee {
     @Column
     private BigDecimal salary;
     @Column
-    private char sex;
+    private String sex;
     @Column
     private Long supervisor_id;
+    @ManyToOne
+    @JoinColumn(name="departament_number")
+    private Departament departament;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Departament getDepartament() {
+        return departament;
+    }
+
+    public void setDepartament(Departament departament) {
+        this.departament = departament;
+    }
 
     public String getName() {
         return name;
@@ -55,11 +74,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -82,5 +101,11 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+        return "Employee: " + this.getName() + " " +
+                this.getLastName() + " " + this.departament.getName();
     }
 }
