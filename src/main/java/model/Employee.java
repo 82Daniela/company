@@ -2,9 +2,12 @@ package model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-@Entity(name="employee")
+@Entity(name = "employee")
 public class Employee {
 
     @Id
@@ -23,8 +26,28 @@ public class Employee {
     @Column
     private Long supervisor_id;
     @ManyToOne
-    @JoinColumn(name="departament_number")
+    @JoinColumn(name = "departament_number", nullable = false)
     private Departament departament;
+    @OneToMany(mappedBy = "employee")
+    private List<Dependent> dependentList;
+    @ManyToMany(mappedBy = "employees")
+    private Set<Project> projects = new HashSet<Project>();
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Dependent> getDependentList() {
+        return dependentList;
+    }
+
+    public void setDependentList(List<Dependent> dependentList) {
+        this.dependentList = dependentList;
+    }
 
     public Long getId() {
         return id;
@@ -104,7 +127,7 @@ public class Employee {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Employee: " + this.getName() + " " +
                 this.getLastName() + " " + this.departament.getName();
     }

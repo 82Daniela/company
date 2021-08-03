@@ -13,7 +13,7 @@ public class DepartamentRepositoryImpl implements DepartamentRepository {
     }
 
     @Override
-    public Departament getDepartamentById(Long id) {
+    public Departament getDepartamentByNumber(Long id) {
         return manager.find(Departament.class,id);
     }
 
@@ -35,4 +35,8 @@ public class DepartamentRepositoryImpl implements DepartamentRepository {
             System.out.println("Can't find the departament "+ departament.getNumber());
         }
     }
+
+
+
+
 }
