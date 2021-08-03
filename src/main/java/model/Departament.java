@@ -11,6 +11,17 @@ public class Departament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
 
+    @Column
+    private String name;
+    @OneToOne
+    @JoinColumn(name = "manager_id")
+    private Employee employee;
+    @Column
+    private Timestamp start_date;
+
+    @OneToMany(mappedBy = "departament")
+    private List<Employee> employeeList;
+
     public Long getNumber() {
         return number;
     }
@@ -51,14 +62,4 @@ public class Departament {
         this.employeeList = employeeList;
     }
 
-    @Column
-    private String name;
-    @OneToOne
-    @JoinColumn(name = "manager_id")
-    private Employee employee;
-    @Column
-    private Timestamp start_date;
-
-    @OneToMany(mappedBy = "departament")
-    private List<Employee> employeeList;
 }
