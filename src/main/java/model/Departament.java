@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,6 +23,21 @@ public class Departament {
 
     @OneToMany(mappedBy = "departament")
     private List<Employee> employeeList;
+
+    @ElementCollection
+    @CollectionTable(name="departament_location",
+            joinColumns = @JoinColumn(name="departament_number")
+    )
+    @Column(name="location",nullable = false, length=200)
+    private List<String> locations = new ArrayList<>();
+
+    public List<String> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
+    }
 
     public Long getNumber() {
         return number;

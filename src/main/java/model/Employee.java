@@ -7,23 +7,24 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity(name = "employee")
+@Entity
+@Table(name="employee")
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(nullable = false)
     private String name;
-    @Column
+    @Column(nullable = false)
     private String lastName;
-    @Column
+    @Column(nullable = false)
     private String address;
-    @Column
+    @Column(nullable = false)
     private BigDecimal salary;
-    @Column
+    @Column(nullable = false)
     private String sex;
-    @Column
+    @Column(nullable = false)
     private Long supervisor_id;
     @ManyToOne
     @JoinColumn(name = "departament_number", nullable = false)
@@ -32,6 +33,29 @@ public class Employee {
     private List<Dependent> dependentList;
     @ManyToMany(mappedBy = "employees")
     private Set<Project> projects = new HashSet<Project>();
+    @ManyToOne
+    @JoinColumn(name="supervisor_id",
+            insertable = false, updatable = false
+    )
+    private Employee employee;
+    @OneToMany(mappedBy = "employee")
+    private List<Employee> employeeList;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
 
     public Set<Project> getProjects() {
         return projects;

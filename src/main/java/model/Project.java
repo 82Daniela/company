@@ -11,10 +11,10 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String location;
 
     @ManyToMany

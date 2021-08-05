@@ -11,9 +11,9 @@ public class Dependent {
     private DependentId id;
     @Column(nullable = false)
     private String sex;
-    @Column
+    @Column(nullable = false)
     private Timestamp birth_date;
-    @Column
+    @Column(nullable = false)
     private String relationship;
 
     public Employee getEmployee() {
@@ -25,7 +25,8 @@ public class Dependent {
     }
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", insertable = false, updatable = false)
+    @JoinColumn(name = "employee_id",
+            insertable = false, updatable = false)
     private Employee employee;
 
     public DependentId getId() {
