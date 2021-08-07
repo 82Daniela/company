@@ -26,7 +26,7 @@ public class Employee {
     private String sex;
     @Column(nullable = false)
     private Long supervisor_id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departament_number", nullable = false)
     private Departament departament;
     @OneToMany(mappedBy = "employee")
