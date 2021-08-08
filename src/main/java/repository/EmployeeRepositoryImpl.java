@@ -41,8 +41,42 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         if(manager.contains(employee)){
             manager.remove(employee);
         }else{
-            System.out.println("Can't find  the employee" + employee.getName());
+            System.out.println("Can't find tthe employee" + employee.getName());
         }
 
     }
+
+    @Override
+    public void deleteAllEmployees() {
+
+        Query q = manager.createQuery(
+                "delete from Employee e "
+        );
+
+        int rowsExecuted = q.executeUpdate();
+
+        System.out.println(rowsExecuted + " rows have been deleted!");
+
+    }
+
+    @Override
+    public void deleteEmployeeByName(String name) {
+
+        Query q = manager.createQuery(
+                "delete from Employee e where e.name=:employeeName"
+        );
+
+        q.setParameter("employeeName", name);
+
+        int rowsExecuted = q.executeUpdate();
+
+        System.out.println(rowsExecuted +" row(s)" +
+                " have been updated!");
+
+
+
+
+    }
+
+
 }

@@ -10,6 +10,11 @@ public class DependentId implements Serializable {
     private Long employee_id;
     private String name;
 
+    public DependentId(Long employee_id, String name){
+        this.employee_id=employee_id;
+        this.name=name;
+    }
+
     public Long getEmployee_id() {
         return employee_id;
     }

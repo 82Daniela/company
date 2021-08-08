@@ -14,12 +14,12 @@ public class Departament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
 
-    @Column
+    @Column(nullable = false)
     private String name;
     @OneToOne
-    @JoinColumn(name = "manager_id")
+    @JoinColumn(name = "manager_id", nullable = false)
     private Employee employee;
-    @Column
+    @Column(nullable = false)
     private Timestamp start_date;
 
     @OneToMany(mappedBy = "departament")

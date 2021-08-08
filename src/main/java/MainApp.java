@@ -6,7 +6,9 @@ import repository.ProjectRepositoryImpl;
 import util.JpaUtil;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,25 +21,15 @@ public class MainApp {
 
         EntityManager manager = JpaUtil.getEntityManager();
 
+
         try {
 
             manager.getTransaction().begin();
 
-            Employee employee = new Employee();
-            employee.setName("Elsie");
-            employee.setLastName("Brown");
-            employee.setSalary(new BigDecimal(100000));
-            employee.setAddress("New York, USA");
-            Departament departament = manager.find(Departament.class,21L);
-            employee.setDepartament(departament);
-            employee.setSex("Female");
-            employee.setSupervisor_id(1L);
+            EmployeeRepositoryImpl employeeRepository =
+                    new EmployeeRepositoryImpl(manager);
 
-            EmployeeRepositoryImpl employeeRepository = new EmployeeRepositoryImpl(manager);
-            employeeRepository.addEmployee(employee);
-
-            Employee supervisor = employeeRepository.getEmployeeById(1L);
-            supervisor.getEmployeeList().forEach(e->System.out.println(e));
+            employeeRepository.deleteEmployeeByName("Elsie");
 
             manager.getTransaction().commit();
 

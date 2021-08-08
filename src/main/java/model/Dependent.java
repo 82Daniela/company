@@ -24,7 +24,7 @@ public class Dependent {
         this.employee = employee;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "employee_id",
             insertable = false, updatable = false)
     private Employee employee;

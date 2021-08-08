@@ -24,16 +24,18 @@ public class Employee {
     private BigDecimal salary;
     @Column(nullable = false)
     private String sex;
+    @Column (nullable = false)
+    private boolean ative;
     @Column(nullable = false)
     private Long supervisor_id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "departament_number", nullable = false)
     private Departament departament;
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", orphanRemoval = true)
     private List<Dependent> dependentList;
     @ManyToMany(mappedBy = "employees")
     private Set<Project> projects = new HashSet<Project>();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="supervisor_id",
             insertable = false, updatable = false
     )
