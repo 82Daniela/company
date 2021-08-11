@@ -29,9 +29,12 @@ public class MainApp {
             EmployeeRepositoryImpl employeeRepository =
                     new EmployeeRepositoryImpl(manager);
 
-            employeeRepository.deleteEmployeeByName("Elsie");
+            Employee e = employeeRepository.getEmployeeByName("Olive");
+
+            System.out.println("Employee name:" + " " + e.getName());
 
             manager.getTransaction().commit();
+
 
         } catch (Exception e) {
             manager.getTransaction().rollback();

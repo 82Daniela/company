@@ -28,20 +28,11 @@ public class Employee {
     private BigDecimal salary;
     @Column(nullable = false)
     private String sex;
-    @Column (nullable = false)
-    private boolean ative;
     @Column(nullable = false)
     private Long supervisor_id;
     @Column(nullable = false)
     private Timestamp updateLastDate;
 
-    public boolean isAtive() {
-        return ative;
-    }
-
-    public void setAtive(boolean ative) {
-        this.ative = ative;
-    }
 
     public Timestamp getUpdateLastDate() {
         return updateLastDate;

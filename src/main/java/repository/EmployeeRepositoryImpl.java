@@ -15,21 +15,33 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     private EntityManager manager;
 
-    public EmployeeRepositoryImpl (EntityManager manager){
+    public EmployeeRepositoryImpl(EntityManager manager) {
         this.manager = manager;
     }
 
 
     @Override
     public Employee getEmployeeById(Long id) {
-        return manager.find(Employee.class,id);
+        return manager.find(Employee.class, id);
+    }
+
+    @Override
+    public Employee getEmployeeByName(String name) {
+
+        Query query = manager.createQuery
+                ("select employee from Employee employee where " +
+                        "employee.name=:name");
+        query.setParameter("name", name);
+        Object employee = query.getSingleResult();
+
+        return (Employee) employee;
     }
 
     @Override
     public void addEmployee(Employee employee) {
-        if(employee.getId()==null){
+        if (employee.getId() == null) {
             manager.persist(employee);
-        }else{
+        } else {
             manager.merge(employee);
         }
     }
@@ -38,9 +50,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public void deleteEmployee(Employee employee) {
 
-        if(manager.contains(employee)){
+        if (manager.contains(employee)) {
             manager.remove(employee);
-        }else{
+        } else {
             System.out.println("Can't find tthe employee" + employee.getName());
         }
 
@@ -70,10 +82,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         int rowsExecuted = q.executeUpdate();
 
-        System.out.println(rowsExecuted +" row(s)" +
+        System.out.println(rowsExecuted + " row(s)" +
                 " have been updated!");
-
-
 
 
     }
