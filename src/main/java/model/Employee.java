@@ -1,7 +1,10 @@
 package model;
 
+import audit.AuditingEmployee;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="employee")
+@EntityListeners(AuditingEmployee.class)
 public class Employee {
 
     @Id
@@ -28,6 +32,25 @@ public class Employee {
     private boolean ative;
     @Column(nullable = false)
     private Long supervisor_id;
+    @Column(nullable = false)
+    private Timestamp updateLastDate;
+
+    public boolean isAtive() {
+        return ative;
+    }
+
+    public void setAtive(boolean ative) {
+        this.ative = ative;
+    }
+
+    public Timestamp getUpdateLastDate() {
+        return updateLastDate;
+    }
+
+    public void setUpdateLastDate(Timestamp updateLastDate) {
+        this.updateLastDate = updateLastDate;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "departament_number", nullable = false)
     private Departament departament;
