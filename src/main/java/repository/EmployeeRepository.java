@@ -10,5 +10,6 @@ public interface EmployeeRepository {
     public void deleteEmployee(Employee employee);
     public void deleteAllEmployees();
     public void deleteEmployeeByName(String name);
+    public void paginationEmployee(int number);
 
 }

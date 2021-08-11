@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.swing.*;
 import java.lang.reflect.Executable;
+import java.util.List;
 
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -85,6 +86,22 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         System.out.println(rowsExecuted + " row(s)" +
                 " have been updated!");
 
+
+    }
+
+    @Override
+    public void paginationEmployee(int number) {
+
+        Query query =
+                manager.createQuery("select employee from Employee employee");
+
+        query.setFirstResult(0);
+        query.setMaxResults(number);
+
+        List<Employee> employeeList = query.getResultList();
+
+        employeeList.forEach
+                (employee->System.out.println(employee.getName()));
 
     }
 

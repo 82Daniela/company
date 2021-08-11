@@ -33,6 +33,8 @@ public class MainApp {
 
             System.out.println("Employee name:" + " " + e.getName());
 
+            employeeRepository.paginationEmployee(3);
+
             manager.getTransaction().commit();
 
 
